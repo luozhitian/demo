@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.com.example.demo.mapper.PeopleMapper">
+    <!--Student POJO映射结果集-->
+    <!--id:唯一标识-->
+    <!--type:具体的POJO对象类型-->
+    <resultMap id="resultMap" type="com.example.com.example.demo.vo.People">
+        <!--column:主键字段也可以是查询语句中的别名字段-->
+        <!--property:对应POJO对象中的属性-->
+        <!--jdbcType:字段类型-->
+        <id column="name" property="name" jdbcType="VARCHAR" />
+        <!--column:表的字段-->
+        <result column="age" property="age" jdbcType="INTEGER" />
+        <result column="work" property="work" jdbcType="VARCHAR" />
+
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.com.example.demo.vo.People">
+        INSERT INTO people(name, age, work)
+        VALUES (#{name}, #{age}, #{work})
+    </insert>
+
+    <!--删除数据-->
+    <delete id="deleteByName" parameterType="String">
+        DELETE from
+        people where name = #{name}
+    </delete>
+
+
+    <!--查询数据-->
+    <select id="queryByName" resultMap="resultMap">
+        SELECT
+        *
+        FROM people where name = #{name}
+    </select>
+</mapper>
